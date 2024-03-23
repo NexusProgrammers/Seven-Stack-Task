@@ -14,14 +14,13 @@ config();
 
 const app = express();
 
-app.use(
-  morgan("dev"),
-  express.json({ limit: "50mb" }),
-  helmet(),
-  cors(),
-  compression(),
-  ExpressMongoSanitize(),
-);
+app.use(morgan("dev"));
+app.use(express.json({ limit: "50mb" }));
+app.use(helmet());
+app.use(cors());
+app.use(compression());
+app.use(ExpressMongoSanitize());
+
 
 app.options("*", cors());
 
