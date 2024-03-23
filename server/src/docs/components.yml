@@ -1,0 +1,96 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        image:
+          type: string
+        books:
+          type: array
+      example:
+        id: 5ebac534954b54139806c112
+        name: john
+        email: john@gmail.com
+        password: john1234
+        image: https://i.ibb.co/4pDNDk1/avatar.png
+        books: []
+
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        user:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        title: title
+        description: book collections description
+        image: "https://media.istockphoto.com/id/172226074/photo/blank-open-book.jpg?s=612x612&w=0&k=20&c=sTjtFVGfFqFTa5x1g2bt6HmOUGQRfgI0xssiXfNokEc="
+        user: 5ebac534954b54139806c112
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+
+  responses:
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 400
+            message: Email already taken
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 401
+            message: Please authenticate
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 403
+            message: Forbidden
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 404
+            message: Not found
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
