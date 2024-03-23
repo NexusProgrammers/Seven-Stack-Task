@@ -39,7 +39,7 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
 
   return (
     <>
-      <Card sx={{ width: 350, height: 500 }}>
+      <Card sx={{ width: 400, height: 550 }}>
         <CardHeader
           avatar={
             <Link to={"/profile"} title="profile">
@@ -69,10 +69,13 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
           sx={{ width: "100%", height: "300px" }}
           alt="ImageCard"
         />
-        <CardContent>
+        <CardContent className="flex flex-col gap-1">
+          <Typography variant="h6" color="black">
+            {item.title}
+          </Typography>
           <Typography variant="body2" color="text.secondary">
             {item.description.length > 220
-              ? `${item?.description.substring(0, 220)}...`
+              ? `${item?.description.substring(0, 200)}...`
               : item.description}
           </Typography>
         </CardContent>
