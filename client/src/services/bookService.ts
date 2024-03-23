@@ -83,8 +83,6 @@ export const getBook = createAsyncThunk<
 >("book/getBook", async (id, { rejectWithValue }) => {
   try {
     const response = await bookAPI.get(`/get-one/${id}`);
-    console.log(response);
-    console.log(id);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {
