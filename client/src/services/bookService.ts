@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import {
   AddBookFormValues,
   AddBookResponse,
+  Book,
   BookState,
   UpdateBookFormValues,
   updateBookResponse,
@@ -53,6 +54,37 @@ export const getBooks = createAsyncThunk<
 >("book/getBooks", async (_, { rejectWithValue }) => {
   try {
     const response = await bookAPI.get("/get-all");
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      const customError = error as CustomError;
+      if (
+        customError.response &&
+        customError.response.data &&
+        customError.response.data.message
+      ) {
+        toast.error(customError.response.data.message, {
+          duration: 2000,
+        });
+      } else {
+        toast.error("An unknown error occurred.", {
+          duration: 2000,
+        });
+      }
+      return rejectWithValue({ message: error.message });
+    }
+  }
+});
+
+export const getBook = createAsyncThunk<
+  Book,
+  string,
+  { rejectValue: ErrorResponse }
+>("book/getBook", async (id, { rejectWithValue }) => {
+  try {
+    const response = await bookAPI.get(`/get-one/${id}`);
+    console.log(response);
+    console.log(id);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {

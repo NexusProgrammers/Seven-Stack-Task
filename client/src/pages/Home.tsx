@@ -13,7 +13,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch<any>(getBooks());
-  }, []);
+  }, [dispatch]);
 
   const filteredBooks = books.filter((book: Book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ButtonSpinner from "./components/ButtonSpinner";
 import PublicRoute from "./components/PublicRoute";
 import ProtectRoute from "./components/ProtectRoute";
+import ViewBook from "./pages/ViewBook";
 const Home = lazy(() => import("./pages/Home"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const SignIn = lazy(() => import("./pages/SignIn"));
@@ -29,6 +30,14 @@ const App = () => {
             element={
               <ProtectRoute>
                 <Profile />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="/book/:id"
+            element={
+              <ProtectRoute>
+                <ViewBook />
               </ProtectRoute>
             }
           />

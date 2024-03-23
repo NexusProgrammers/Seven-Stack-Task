@@ -38,6 +38,8 @@ export interface BookState {
   updateBookError: string | null;
   deleteBookLoading: boolean | false;
   deleteBookError: string | null;
+  getBookLoading: boolean | false;
+  getBookError: string | null;
 }
 
 export interface updateBookResponse {

@@ -10,7 +10,11 @@ import { red } from "@mui/material/colors";
 import { Book } from "../types/bookTypes";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import { DeleteRoundedIcon, EditRoundedIcon } from "../icons";
+import {
+  DeleteRoundedIcon,
+  EditRoundedIcon,
+  RemoveRedEyeRoundedIcon,
+} from "../icons";
 import BookModal from "./BookModal";
 import ConfirmationModal from "./ConfirmationModal";
 import { useDispatch } from "react-redux";
@@ -52,6 +56,11 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
           }
           action={
             <>
+              <Link to={`/book/${item._id}`}>
+                <IconButton>
+                  <RemoveRedEyeRoundedIcon color="info" titleAccess="view" />
+                </IconButton>
+              </Link>
               <IconButton onClick={() => setShowAddBookModal(true)}>
                 <EditRoundedIcon color="info" titleAccess="Update" />
               </IconButton>

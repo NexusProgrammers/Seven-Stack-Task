@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { getUserProfile } from "../services/userService";
 import {
   AddRoundedIcon,
+  BiLogOutCircle,
   ExitToAppRoundedIcon,
   HomeRoundedIcon,
   HowToRegRoundedIcon,
+  VscAccount,
 } from "../icons";
 import BookModal from "./BookModal";
 
@@ -35,7 +37,7 @@ const Header: React.FC = () => {
     {
       token && dispatch<any>(getUserProfile());
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
     <>
@@ -58,38 +60,38 @@ const Header: React.FC = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      <Link
-                        to={"/signup"}
-                        className={classNames(
-                          "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                      >
-                        {!token && (
+                      {!token && (
+                        <Link
+                          to={"/signup"}
+                          className={classNames(
+                            "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                        >
                           <p className="flex items-center gap-1">
                             <span>Sign Up</span>
                             <span>
                               <HowToRegRoundedIcon />
                             </span>
                           </p>
-                        )}
-                      </Link>
-                      <Link
-                        to={"/signin"}
-                        className={classNames(
-                          "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                      >
-                        {!token && (
+                        </Link>
+                      )}
+                      {!token && (
+                        <Link
+                          to={"/signin"}
+                          className={classNames(
+                            "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                        >
                           <p className="flex items-center gap-1">
                             <span>Sign In</span>
                             <span>
                               <ExitToAppRoundedIcon />
                             </span>
                           </p>
-                        )}
-                      </Link>
+                        </Link>
+                      )}
                       {token && (
                         <Link
                           to={"/"}
@@ -150,17 +152,20 @@ const Header: React.FC = () => {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }: { active: boolean }) => (
                               <Link
                                 to={"/profile"}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                                  "flex items-center gap-2 px-4 py-2 text-sm text-gray-700 cursor-pointer"
                                 )}
                               >
-                                Profile
+                                <span>
+                                  <VscAccount size={20} />
+                                </span>
+                                <span>Profile</span>
                               </Link>
                             )}
                           </Menu.Item>
@@ -170,10 +175,13 @@ const Header: React.FC = () => {
                                 onClick={handleLogout}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                                  "flex items-center gap-2 px-4 py-2 text-sm text-gray-700 cursor-pointer"
                                 )}
                               >
-                                Sign out
+                                <span>
+                                  <BiLogOutCircle size={20} />
+                                </span>
+                                <span>Sign out</span>
                               </a>
                             )}
                           </Menu.Item>
@@ -190,38 +198,38 @@ const Header: React.FC = () => {
                 <Disclosure.Button
                   className={"w-full flex items-start justify-start flex-col"}
                 >
-                  <Link
-                    to={"/signup"}
-                    className={classNames(
-                      "text-gray-300 hover:bg-gray-700 hover:text-white w-full flex items-start",
-                      "block rounded-md px-3 py-2 text-base font-medium w-full"
-                    )}
-                  >
-                    {!token && (
+                  {!token && (
+                    <Link
+                      to={"/signup"}
+                      className={classNames(
+                        "text-gray-300 hover:bg-gray-700 hover:text-white w-full flex items-start",
+                        "block rounded-md px-3 py-2 text-base font-medium w-full"
+                      )}
+                    >
                       <p className="flex items-center gap-1">
                         <span>Sign Up</span>
                         <span>
                           <HowToRegRoundedIcon />
                         </span>
                       </p>
-                    )}
-                  </Link>
-                  <Link
-                    to={"/signin"}
-                    className={classNames(
-                      "text-gray-300 hover:bg-gray-700 hover:text-white w-full flex items-start",
-                      "block rounded-md px-3 py-2 text-base font-medium w-full"
-                    )}
-                  >
-                    {!token && (
+                    </Link>
+                  )}
+                  {!token && (
+                    <Link
+                      to={"/signin"}
+                      className={classNames(
+                        "text-gray-300 hover:bg-gray-700 hover:text-white w-full flex items-start",
+                        "block rounded-md px-3 py-2 text-base font-medium w-full"
+                      )}
+                    >
                       <p className="flex items-center gap-1">
                         <span>Sign In</span>
                         <span>
                           <ExitToAppRoundedIcon />
                         </span>
                       </p>
-                    )}
-                  </Link>
+                    </Link>
+                  )}
                 </Disclosure.Button>
                 {token && (
                   <Link
