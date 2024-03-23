@@ -21,7 +21,6 @@ app.use(cors());
 app.use(compression());
 app.use(ExpressMongoSanitize());
 
-
 app.options("*", cors());
 
 const port = process?.env?.PORT || 8000;
@@ -33,8 +32,8 @@ app.get("/", (req, res) => {
 dbConnect();
 
 app.use("/api/v1", mainRouter);
-app.use((req,res, next) => {
-  next(new ApiError(httpStatus.NOT_FOUND, "Not Found"))
+app.use((req, res, next) => {
+  next(new ApiError(httpStatus.NOT_FOUND, "Not Found"));
 });
 
 app.listen(port, () => {
